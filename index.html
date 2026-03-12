@@ -1,1 +1,405 @@
 
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>B Motors KGM - Asset Sunumu ve Dijital Strateji</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .logo-font {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 0.05em;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .sidebar-item.active {
+            background-color: #dc2626; /* Red-600 */
+            color: white;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+        /* Mobile Scrollbar Hide */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .kgm-gradient {
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+<div class="min-h-screen flex flex-col md:flex-row">
+    <!-- Sidebar / Topbar on Mobile -->
+    <aside class="w-full md:w-72 bg-white text-slate-900 flex flex-col shadow-xl z-30 sticky top-0 md:h-screen flex-shrink-0 border-r border-slate-200">
+        <!-- Logo Section -->
+        <div class="p-4 md:p-6 border-b border-slate-100 flex justify-between items-center md:block bg-white relative z-20">
+            <div>
+                <h1 class="text-3xl md:text-5xl tracking-wide logo-font leading-none text-slate-900">
+                    B MOTORS<br class="hidden md:block"><span class="text-red-600 md:block mt-1">KGM</span>
+                </h1>
+                <p class="text-[9px] md:text-[11px] text-slate-500 mt-1 md:mt-2 uppercase tracking-widest font-bold">Asset Sunumu & Strateji</p>
+            </div>
+        </div>
+        
+        <!-- Navigation -->
+        <nav class="flex flex-row md:flex-col px-3 md:px-4 py-3 md:py-6 space-x-2 md:space-x-0 md:space-y-2 overflow-x-auto md:overflow-y-auto no-scrollbar bg-white shadow-inner md:shadow-none border-b md:border-none border-slate-100">
+            <button onclick="showTab('ozet', this)" class="sidebar-item active w-auto md:w-full flex-shrink-0 flex items-center space-x-2 md:space-x-3 px-3 md:px-4 py-2.5 md:py-3 rounded-lg transition-all text-slate-600 hover:bg-slate-50 hover:text-red-600 text-sm md:text-base">
+                <i data-lucide="layout-template" class="w-4 h-4 md:w-5 md:h-5"></i>
+                <span class="font-medium whitespace-nowrap">Marka Kimliği</span>
+            </button>
+            <button onclick="showTab('kampanya', this)" class="sidebar-item w-auto md:w-full flex-shrink-0 flex items-center space-x-2 md:space-x-3 px-3 md:px-4 py-2.5 md:py-3 rounded-lg transition-all text-slate-600 hover:bg-slate-50 hover:text-red-600 text-sm md:text-base">
+                <i data-lucide="tag" class="w-4 h-4 md:w-5 md:h-5"></i>
+                <span class="font-medium whitespace-nowrap">Güncel Kampanya</span>
+            </button>
+            <button onclick="showTab('sosyal', this)" class="sidebar-item w-auto md:w-full flex-shrink-0 flex items-center space-x-2 md:space-x-3 px-3 md:px-4 py-2.5 md:py-3 rounded-lg transition-all text-slate-600 hover:bg-slate-50 hover:text-red-600 text-sm md:text-base">
+                <i data-lucide="smartphone" class="w-4 h-4 md:w-5 md:h-5"></i>
+                <span class="font-medium whitespace-nowrap">Sosyal Varlıklar</span>
+            </button>
+            <button onclick="showTab('reklam', this)" class="sidebar-item w-auto md:w-full flex-shrink-0 flex items-center space-x-2 md:space-x-3 px-3 md:px-4 py-2.5 md:py-3 rounded-lg transition-all text-slate-600 hover:bg-slate-50 hover:text-red-600 text-sm md:text-base">
+                <i data-lucide="trending-up" class="w-4 h-4 md:w-5 md:h-5"></i>
+                <span class="font-medium whitespace-nowrap">Performans Verisi</span>
+            </button>
+            <button onclick="showTab('kapsam', this)" class="sidebar-item w-auto md:w-full flex-shrink-0 flex items-center space-x-2 md:space-x-3 px-3 md:px-4 py-2.5 md:py-3 rounded-lg transition-all text-slate-600 hover:bg-slate-50 hover:text-red-600 bg-red-50/50 border border-red-100 text-sm md:text-base md:mt-2">
+                <i data-lucide="file-check" class="w-4 h-4 md:w-5 md:h-5 text-red-600"></i>
+                <span class="font-medium text-red-700 whitespace-nowrap">Hizmet Kapsamı</span>
+            </button>
+        </nav>
+        
+        <!-- Corporate Footer -->
+        <div class="p-5 mt-auto border-t border-slate-100 text-center hidden md:block">
+            <div class="mb-2">
+                <span class="text-[10px] text-slate-400 uppercase tracking-[0.2em] block mb-1">Stratejik Partner</span>
+                <span class="text-xs text-slate-800 font-bold tracking-wider">MUIMEDYA</span>
+            </div>
+            <p class="text-[9px] text-slate-400 leading-relaxed italic">
+                B Motors KGM için 12 Mart 2026 tarihinde güncellenmiştir.<br/>
+                Sivas & Bursa Operasyonları
+            </p>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 w-full p-4 sm:p-6 md:p-10 overflow-x-hidden pb-12 md:pb-10">
+        <header class="mb-6 md:mb-10 border-b border-slate-200 pb-4 md:pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div>
+                <h2 id="page-title" class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 capitalize leading-tight">B Motors & KGM Marka Varlığı</h2>
+                <p class="text-sm md:text-base text-slate-500 mt-2 font-medium">Yeni Nesil SUV Deneyimi: Torres, Actyon, Tivoli, Musso EV.</p>
+            </div>
+            <div class="flex items-center space-x-2">
+                <span class="px-3 py-1 bg-green-600 text-white text-[10px] font-bold rounded-full uppercase">Performans Onaylı</span>
+                <span class="px-3 py-1 bg-slate-100 text-slate-600 text-[10px] font-bold rounded-full uppercase">Şubat Sonuçları Eklendi</span>
+            </div>
+        </header>
+
+        <!-- --- TAB: ÖZET --- -->
+        <div id="ozet" class="tab-content active space-y-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-100">
+                    <h3 class="text-lg md:text-xl font-bold text-slate-900 mb-4 flex items-center">
+                        <i data-lucide="target" class="text-red-600 mr-2 w-6 h-6"></i> Vizyon: Türkiye'nin KGM Merkezi
+                    </h3>
+                    <p class="text-sm md:text-base text-slate-600 leading-relaxed mb-6">
+                        B Motors'un <strong>Sivas ve Bursa</strong> merkezli operasyonlarını, KGM'nin global gücüyle birleştiriyoruz. Şubat ayı verileri, dijital stratejimizin doğru kitleye ulaştığını ve nitelikli talep oluşturduğunu kanıtlamaktadır.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center p-3 bg-slate-50 rounded-xl border border-slate-100">
+                            <div class="w-10 h-10 bg-red-100 text-red-600 rounded-lg flex items-center justify-center mr-4"><i data-lucide="map-pin"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm text-slate-800">Çoklu Lokasyon Gücü</h4>
+                                <p class="text-xs text-slate-500">Sivas & Bursa: Güçlü Stok, Yerel Güven.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-red-600 rounded-2xl p-6 md:p-8 text-white flex flex-col justify-between shadow-lg relative overflow-hidden">
+                    <div class="absolute top-0 right-0 opacity-10 transform translate-x-1/4 -translate-y-1/4">
+                        <i data-lucide="shield-check" class="w-64 h-64"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <h3 class="text-xl md:text-2xl font-bold mb-2">Kurumsal Kimlik Entegrasyonu</h3>
+                        <p class="text-red-100 text-sm md:text-base mb-6">Dijital varlıklarımızı KGM'nin premium renk paletiyle modernize ediyoruz. Sonuç odaklı bir tasarım dili kullanıyoruz.</p>
+                        <ul class="space-y-2 text-sm">
+                            <li class="flex items-center"><i data-lucide="check" class="mr-2 w-4 h-4"></i> High-Contrast Tasarım Dili</li>
+                            <li class="flex items-center"><i data-lucide="check" class="mr-2 w-4 h-4"></i> Tipografik Netlik</li>
+                            <li class="flex items-center"><i data-lucide="check" class="mr-2 w-4 h-4"></i> Otomotiv Standartlarında UI/UX</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- --- TAB: GÜNCEL KAMPANYA --- -->
+        <div id="kampanya" class="tab-content space-y-6">
+            <div class="bg-white p-6 md:p-10 rounded-2xl shadow-sm border border-slate-100 border-t-8 border-red-600">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+                    <div>
+                        <h3 class="text-2xl md:text-3xl font-extrabold text-slate-900">Mart Ayına Özel Teklifler</h3>
+                        <p class="text-red-600 font-bold uppercase tracking-widest text-sm mt-1">Sınırlı Süre & Stok Avantajı</p>
+                    </div>
+                    <div class="bg-slate-900 text-white px-6 py-3 rounded-xl">
+                        <span class="text-xs block text-slate-400">Son Güncelleme</span>
+                        <span class="font-bold text-lg">12 Mart 2026</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-red-50 p-6 rounded-2xl border border-red-100 text-center">
+                        <i data-lucide="refresh-cw" class="w-10 h-10 text-red-600 mx-auto mb-4"></i>
+                        <div class="text-slate-500 text-xs font-bold uppercase">Takas Desteği</div>
+                        <div class="text-3xl font-black text-red-600 mt-1">75.000 TL</div>
+                        <p class="text-xs text-slate-600 mt-2">Mevcut aracınızı KGM güvencesiyle yenileyin.</p>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-center">
+                        <i data-lucide="percent" class="w-10 h-10 text-slate-900 mx-auto mb-4"></i>
+                        <div class="text-slate-500 text-xs font-bold uppercase">Kredi İmkanı</div>
+                        <div class="text-3xl font-black text-slate-900 mt-1">0 FAİZ</div>
+                        <p class="text-xs text-slate-600 mt-2">500.000 TL / 12 Ay vadeli finansman desteği.</p>
+                    </div>
+                    <div class="bg-slate-900 p-6 rounded-2xl text-center">
+                        <i data-lucide="banknote" class="w-10 h-10 text-red-500 mx-auto mb-4"></i>
+                        <div class="text-slate-400 text-xs font-bold uppercase">Nakit Alım Fiyatı</div>
+                        <div class="text-2xl font-black text-white mt-1">2.360.000 TL'den</div>
+                        <p class="text-xs text-slate-400 mt-2">Başlayan avantajlı fiyatlarla yeni Actyon.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- --- TAB: SOSYAL VARLIKLAR --- -->
+        <div id="sosyal" class="tab-content space-y-6">
+            <div class="bg-slate-900 rounded-2xl p-8 text-white relative overflow-hidden">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-6">
+                    <div>
+                        <h3 class="text-2xl font-bold">Instagram Asset Yönetimi</h3>
+                        <p class="text-slate-400 text-sm mt-1">@bmotorskgm | 1,757 Takipçi | %100 Nitelikli Hedef Kitle</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="aspect-square bg-slate-800 rounded-xl border border-white/10 p-4 flex flex-col justify-between">
+                        <i data-lucide="image" class="w-6 h-6 text-red-500"></i>
+                        <div>
+                            <div class="text-[10px] font-bold text-slate-500 uppercase">Statik Post</div>
+                            <div class="text-xs font-bold text-white mt-1">Torres EVX Duyurusu</div>
+                        </div>
+                    </div>
+                    <div class="aspect-square bg-slate-800 rounded-xl border border-white/10 p-4 flex flex-col justify-between border-l-4 border-l-red-600">
+                        <i data-lucide="play-circle" class="w-6 h-6 text-red-500"></i>
+                        <div>
+                            <div class="text-[10px] font-bold text-slate-500 uppercase">Reels Video</div>
+                            <div class="text-xs font-bold text-white mt-1">Actyon POV Sürüşü</div>
+                        </div>
+                    </div>
+                    <div class="aspect-square bg-slate-800 rounded-xl border border-white/10 p-4 flex flex-col justify-between">
+                        <i data-lucide="layers" class="w-6 h-6 text-red-500"></i>
+                        <div>
+                            <div class="text-[10px] font-bold text-slate-500 uppercase">Carousel</div>
+                            <div class="text-xs font-bold text-white mt-1">Teknik Özellik Karşılaştırma</div>
+                        </div>
+                    </div>
+                    <div class="aspect-square bg-slate-800 rounded-xl border border-white/10 p-4 flex flex-col justify-between">
+                        <i data-lucide="heart" class="w-6 h-6 text-red-500"></i>
+                        <div>
+                            <div class="text-[10px] font-bold text-slate-500 uppercase">Story Seti</div>
+                            <div class="text-xs font-bold text-white mt-1">Müşteri Teslimat Anları</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- --- TAB: REKLAM & KPI (ŞUBAT VERİLERİYLE GÜNCELLENDİ) --- -->
+        <div id="reklam" class="tab-content space-y-6">
+            <!-- Summary Header -->
+            <div class="bg-gradient-to-r from-red-600 to-red-800 rounded-2xl p-6 md:p-8 text-white shadow-lg">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div>
+                        <h3 class="text-2xl md:text-3xl font-black uppercase italic tracking-tighter">ŞUBAT AYI: ÇALIŞMAMIZ SONUÇ VERİYOR!</h3>
+                        <p class="text-red-100 text-sm md:text-base mt-2">B Motors için yürüttüğümüz kampanyalar hedeflenen tüm metriklerde başarıya ulaştı.</p>
+                    </div>
+                    <div class="bg-white/20 backdrop-blur-md px-6 py-4 rounded-2xl border border-white/30 text-center">
+                        <span class="text-xs font-bold uppercase opacity-80">Toplam Erişim</span>
+                        <div class="text-3xl font-black">174.136</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Core Metrics Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 text-center">
+                    <div class="text-4xl font-black text-slate-900 mb-1">533</div>
+                    <div class="text-[10px] font-bold text-red-600 uppercase tracking-widest">Form Potansiyel Müşteri</div>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">Sadece tek bir kampanyadan (Lead Form) gelen sıcak müşteri datası.</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 text-center">
+                    <div class="text-4xl font-black text-slate-900 mb-1">732</div>
+                    <div class="text-[10px] font-bold text-red-600 uppercase tracking-widest">Toplam Mesajlaşma</div>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">WhatsApp ve DM üzerinden başlatılan gerçek müşteri konuşmaları.</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 text-center">
+                    <div class="text-4xl font-black text-slate-900 mb-1">477.075</div>
+                    <div class="text-[10px] font-bold text-red-600 uppercase tracking-widest">Toplam Gösterim</div>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">B Motors markasının ay boyunca kullanıcı ekranlarında görünme sayısı.</p>
+                </div>
+            </div>
+
+            <!-- Campaign Detail Table -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+                <div class="p-5 border-b border-slate-100 font-bold text-slate-800 bg-slate-50 flex justify-between">
+                    <span>Kampanya Detay Analizi (Şubat)</span>
+                    <span class="text-xs text-slate-400">Gerçek CSV Verileri</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs md:text-sm">
+                        <thead class="bg-slate-50 text-slate-500 uppercase text-[10px] font-bold">
+                            <tr>
+                                <th class="p-4">Kampanya Adı</th>
+                                <th class="p-4">Sonuç Türü</th>
+                                <th class="p-4">Sonuçlar</th>
+                                <th class="p-4">Mesajlar</th>
+                                <th class="p-4">Sonuç Başı Maliyet</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 text-slate-700">
+                            <tr>
+                                <td class="p-4 font-bold">Potansiyel Müşteriler</td>
+                                <td class="p-4">Form (Lead)</td>
+                                <td class="p-4 text-green-600 font-bold">533 Adet</td>
+                                <td class="p-4">141</td>
+                                <td class="p-4 text-slate-400">24,75 TRY</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-bold">Yeni Etkileşim Kampanyası</td>
+                                <td class="p-4">Mesajlaşma</td>
+                                <td class="p-4 text-green-600 font-bold">423 Adet</td>
+                                <td class="p-4">423</td>
+                                <td class="p-4 text-slate-400">20,86 TRY</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-bold">Özel Proje / Haziran 2025</td>
+                                <td class="p-4">Mesajlaşma</td>
+                                <td class="p-4 text-green-600 font-bold">168 Adet</td>
+                                <td class="p-4">168</td>
+                                <td class="p-4 text-slate-400">47,80 TRY</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Efficiency Note -->
+            <div class="bg-green-50 p-6 rounded-2xl border border-green-100 flex items-start gap-4">
+                <div class="w-12 h-12 bg-green-600 text-white rounded-full flex items-center justify-center flex-shrink-0"><i data-lucide="trending-up"></i></div>
+                <div>
+                    <h4 class="font-bold text-green-800">Verimlilik Analizi</h4>
+                    <p class="text-xs md:text-sm text-green-700 mt-1">Şubat ayında form başı maliyet 24,75 TRY gibi otomotiv sektörü standartlarının çok altında bir seviyede tutulmuştur. Bu, reklam setlerimizin hedef kitle doğruluğunu ve "B Motors" markasına duyulan güveni göstermektedir.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- --- TAB: HİZMET KAPSAMI --- -->
+        <div id="kapsam" class="tab-content">
+            <div class="max-w-4xl mx-auto space-y-6">
+                <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100">
+                    <div class="bg-red-600 p-8 text-white text-center">
+                        <h3 class="text-2xl font-bold uppercase tracking-widest">Dijital Performans Paketi</h3>
+                        <p class="text-red-100 mt-2">B Motors KGM (Sivas & Bursa) Özel Kapsamı</p>
+                    </div>
+                    <div class="p-8">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="font-bold text-slate-900 mb-4 pb-2 border-b border-slate-100 flex items-center">
+                                    <i data-lucide="palette" class="w-5 h-5 mr-2 text-red-600"></i> Kreatif & Sosyal Medya
+                                </h4>
+                                <ul class="space-y-3 text-sm text-slate-600">
+                                    <li class="flex items-start"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2 mt-1"></i> 12 Adet Kurumsal Tasarım Post</li>
+                                    <li class="flex items-start"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2 mt-1"></i> 8 Adet Reels Video Kurgusu</li>
+                                    <li class="flex items-start"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2 mt-1"></i> Günlük Hikaye (Story) Akışı</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 mb-4 pb-2 border-b border-slate-100 flex items-center">
+                                    <i data-lucide="zap" class="w-5 h-5 mr-2 text-red-600"></i> Performans Pazarlama
+                                </h4>
+                                <ul class="space-y-3 text-sm text-slate-600">
+                                    <li class="flex items-start"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2 mt-1"></i> Google Arama Ağı & P-Max Yönetimi</li>
+                                    <li class="flex items-start"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2 mt-1"></i> Meta (IG/FB) Lead Reklamları</li>
+                                    <li class="flex items-start"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2 mt-1"></i> Yerel SEO & Harita Optimizasyonu</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between text-white gap-4">
+                    <p class="text-sm font-medium">Bu sunumdaki varlıklar Şubat 2026 gerçek verilerini ve Mart kampanya planını içermektedir.</p>
+                    <a href="https://wa.me/903462263058" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl text-xs font-bold uppercase transition-all shadow-lg">Onaylıyorum, Devam Edelim</a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Page titles mapping
+    const titles = {
+        ozet: "B Motors & KGM Marka Varlığı",
+        kampanya: "Mart Ayı Özel Kampanya Detayları",
+        sosyal: "Dijital Asset & Sosyal Varlıklar",
+        reklam: "Şubat Ayı Performans Analizi (Gerçek Veriler)",
+        kapsam: "B Motors KGM Hizmet Kapsamı"
+    };
+
+    // Tab switcher function
+    function showTab(tabId, element) {
+        document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
+        element.classList.add('active');
+        
+        // Update Title dynamically
+        const pageTitle = document.getElementById('page-title');
+        if (pageTitle) {
+            pageTitle.innerText = titles[tabId];
+        }
+        
+        // Mobile scroll behavior
+        if (window.innerWidth < 768) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            element.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+    }
+</script>
+
+</body>
+</html>
